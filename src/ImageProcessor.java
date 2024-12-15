@@ -1,22 +1,40 @@
 import java.awt.image.BufferedImage;
 
+/**
+ * Класс для обработки изображений с использованием метода наименьших значащих битов (LSB).
+ */
 public class ImageProcessor {
 
-    // Embed text into an image using LSB method
+    /**
+     * Встраивает текстовую информацию в изображение с использованием метода LSB.
+     *
+     * @param image Исходное изображение.
+     * @param text  Текст для встраивания.
+     * @return Измененное изображение с встроенным текстом.
+     */
     public static BufferedImage embedText(BufferedImage image, String text) {
-        // Преобразуем текст в бинарную строку и добавим маркер конца
         String binaryText = toBinary(text) + "00000000"; // Добавляем 8 битов нулей для конца текста
         return processImageWithText(image, binaryText);
     }
 
-    // Extract text from an image using LSB method
+    /**
+     * Извлекает текстовую информацию из изображения с использованием метода LSB.
+     *
+     * @param image Исходное изображение.
+     * @return Извлеченный текст.
+     */
     public static String extractText(BufferedImage image) {
         StringBuilder binaryText = new StringBuilder();
         processImageForText(image, binaryText);
         return fromBinary(binaryText.toString());
     }
 
-    // Convert text to binary
+    /**
+     * Преобразует текст в бинарную строку.
+     *
+     * @param text Текст для преобразования.
+     * @return Бинарная строка.
+     */
     private static String toBinary(String text) {
         StringBuilder binary = new StringBuilder();
         for (char c : text.toCharArray()) {
@@ -25,7 +43,12 @@ public class ImageProcessor {
         return binary.toString();
     }
 
-    // Convert binary to text
+    /**
+     * Преобразует бинарную строку в текст.
+     *
+     * @param binary Бинарная строка.
+     * @return Текст.
+     */
     private static String fromBinary(String binary) {
         StringBuilder text = new StringBuilder();
         for (int i = 0; i < binary.length(); i += 8) {
@@ -39,7 +62,13 @@ public class ImageProcessor {
         return text.toString();
     }
 
-    // Process image for embedding or extracting text based on binaryText
+    /**
+     * Обрабатывает изображение для встраивания текста.
+     *
+     * @param image      Исходное изображение.
+     * @param binaryText Бинарная строка текста.
+     * @return Измененное изображение.
+     */
     private static BufferedImage processImageWithText(BufferedImage image, String binaryText) {
         BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
         int binaryIndex = 0;
@@ -49,28 +78,25 @@ public class ImageProcessor {
             for (int x = 0; x < image.getWidth(); x++) {
                 int rgb = image.getRGB(x, y);
 
-                // Если есть еще биты для вставки
                 if (binaryIndex < binaryText.length()) {
-                    int lsb = Character.getNumericValue(binaryText.charAt(binaryIndex)); // Получаем текущий бит
+                    int lsb = Character.getNumericValue(binaryText.charAt(binaryIndex));
 
-                    int r = (rgb >> 16) & 0xFF;  // Извлекаем красный канал
-                    int g = (rgb >> 8) & 0xFF;   // Извлекаем зеленый канал
-                    int b = rgb & 0xFF;          // Извлекаем синий канал
+                    int r = (rgb >> 16) & 0xFF;
+                    int g = (rgb >> 8) & 0xFF;
+                    int b = rgb & 0xFF;
 
-                    // Изменяем только младший бит красного канала
-                    r = (r & 0xFE) | lsb;  // Устанавливаем младший бит красного канала
+                    r = (r & 0xFE) | lsb;
 
-                    // Восстанавливаем RGB
                     int modifiedRgb = (r << 16) | (g << 8) | b;
                     result.setRGB(x, y, modifiedRgb);
 
                     binaryIndex++;
                 } else {
-                    result.setRGB(x, y, rgb);  // Если больше нет бит, копируем пиксель как есть
+                    result.setRGB(x, y, rgb);
                 }
 
                 if (binaryIndex >= binaryText.length()) {
-                    break outerLoop;  // Прерываем цикл, если все биты вставлены
+                    break outerLoop;
                 }
             }
         }
@@ -78,12 +104,17 @@ public class ImageProcessor {
         return result;
     }
 
-    // Process image for extracting text by appending least significant bits to binaryText
+    /**
+     * Обрабатывает изображение для извлечения текста.
+     *
+     * @param image      Исходное изображение.
+     * @param binaryText Строка для хранения бинарного текста.
+     */
     private static void processImageForText(BufferedImage image, StringBuilder binaryText) {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
                 int rgb = image.getRGB(x, y);
-                int lsb = (rgb >> 16) & 1; // Извлекаем младший бит красного канала
+                int lsb = (rgb >> 16) & 1;
                 binaryText.append(lsb);
             }
         }

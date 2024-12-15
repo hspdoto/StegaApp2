@@ -18,19 +18,31 @@ import javax.imageio.ImageIO;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * Основной класс приложения для стеганографии, который позволяет встраивать текстовую информацию в изображения
+ * и извлекать её с использованием метода наименьших значащих битов (LSB).
+ */
 public class SteganographyApp extends Application {
     private static final Logger logger = LogManager.getLogger(SteganographyApp.class);
     private final ImageView originalImageView = new ImageView();
     private final ImageView modifiedImageView = new ImageView();
     private File originalImageFile;
 
-    public SteganographyApp() {
-    }
-
+    /**
+     * Точка входа в приложение.
+     *
+     * @param args Аргументы командной строки.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Метод инициализации приложения.
+     *
+     * @param primaryStage Основное окно приложения.
+     */
+    @Override
     public void start(Stage primaryStage) {
         try {
             logger.info("Starting Steganography Application...");
@@ -48,12 +60,24 @@ public class SteganographyApp extends Application {
         }
     }
 
+    /**
+     * Создает текстовое поле для ввода текста, который будет встроен в изображение.
+     *
+     * @return Текстовое поле.
+     */
     private TextField createTextField() {
         TextField textField = new TextField();
         textField.setPromptText("Enter text to embed");
         return textField;
     }
 
+    /**
+     * Создает панель с кнопками для загрузки изображения, встраивания текста и извлечения текста.
+     *
+     * @param primaryStage Основное окно приложения.
+     * @param textField    Текстовое поле для ввода текста.
+     * @return Панель с кнопками.
+     */
     private HBox createButtonsBox(Stage primaryStage, TextField textField) {
         Button loadImageButton = new Button("Load Image");
         loadImageButton.setOnAction((e) -> loadImage(primaryStage));
@@ -64,13 +88,23 @@ public class SteganographyApp extends Application {
         return new HBox(10.0, loadImageButton, embedTextButton, extractTextButton);
     }
 
-    // Обработка ошибок и отображение alert
+    /**
+     * Обрабатывает исключения и отображает сообщение об ошибке.
+     *
+     * @param message Сообщение об ошибке.
+     * @param e       Исключение.
+     */
     private void handleException(String message, Exception e) {
         logger.error(message + ": " + e.getMessage(), e);
         showAlert("Error", message + ": " + e.getMessage());
     }
 
-    // Уведомления
+    /**
+     * Отображает уведомление пользователю.
+     *
+     * @param title   Заголовок уведомления.
+     * @param message Сообщение уведомления.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
@@ -78,7 +112,11 @@ public class SteganographyApp extends Application {
         alert.showAndWait();
     }
 
-    // Загрузка изображения и отображение
+    /**
+     * Загружает изображение и отображает его в интерфейсе.
+     *
+     * @param stage Основное окно приложения.
+     */
     private void loadImage(Stage stage) {
         try {
             FileChooser fileChooser = new FileChooser();
@@ -96,7 +134,11 @@ public class SteganographyApp extends Application {
         }
     }
 
-    // Обработка текста для внедрения
+    /**
+     * Обрабатывает встраивание текста в изображение.
+     *
+     * @param text Текст для встраивания.
+     */
     private void handleEmbedText(String text) {
         if (this.originalImageFile != null && !text.isEmpty()) {
             try {
@@ -114,7 +156,9 @@ public class SteganographyApp extends Application {
         }
     }
 
-    // Извлечение текста из изображения
+    /**
+     * Обрабатывает извлечение текста из изображения.
+     */
     private void handleExtractText() {
         if (this.originalImageFile == null) {
             showAlert("Error", "Please load an image first.");
@@ -133,12 +177,23 @@ public class SteganographyApp extends Application {
         }
     }
 
-    // Загружаем BufferedImage
+    /**
+     * Загружает изображение в формате BufferedImage.
+     *
+     * @param file Файл изображения.
+     * @return Загруженное изображение.
+     * @throws IOException Если произошла ошибка при чтении файла.
+     */
     private BufferedImage loadBufferedImage(File file) throws IOException {
         return ImageIO.read(file);
     }
 
-    // Сохраняем и отображаем изображение
+    /**
+     * Сохраняет измененное изображение и отображает его в интерфейсе.
+     *
+     * @param image Измененное изображение.
+     * @throws IOException Если произошла ошибка при записи файла.
+     */
     private void saveAndDisplayImage(BufferedImage image) throws IOException {
         File output = new File("embedded_image.bmp");
         ImageIO.write(image, "bmp", output);

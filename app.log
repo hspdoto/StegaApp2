@@ -104,3 +104,18 @@ L"%¥Éò1oY¬b? VIâÊénøújt;âUòìMì¸I%Zû-¿Gvüd³a�
 2024-12-15 22:33:24 INFO  SteganographyApp:147 - Image saved at C:\Users\brend\IdeaProjects\kursach2\embedded_image.bmp
 2024-12-15 22:33:26 INFO  SteganographyApp:127 - Text extracted successfully: ïÝ¨ã4£}Ù#ÛÔÛ¼ék£ù¦%½$óaDSã R¦Dv @®KÉC<{ÎSâ¦¿®YóaDSã R¦Dv @®KÉC<{ÎSâ¦¿®YóG eÞÙÿ»ã@²]êãÒ?Y8fZ¾2~cßÀÜI«íal;í[Ùç¥EþÁDk£±}Å_p%ÊD[téäà³ýRm8^¨Õªg1j\i&ÒÙ»vÀ­±)éxf¦XÍ'£ê1ÊÊ\sdV)ùK³§kÄ(èæÙ@§ä¢eÖ0%Ø3çÓÇÑ&'±ßâñ¨8s¯Hb9H«"àF(ÑA¯¬*Âbý°@ËïÓ~xÎ$Ð
 |6h`ÆÓK!îª)H>ÿ('Â2Híò½íp$£¦m.,«î±$È÷DíÒâ¡Õ8üê>2Eþb°ÎF°VÔ¬Ñ:×GÄ^2¥«\±yáôÉæíLwrÜ £«êWè9>hÀU/Yû«àí¿/%æNÆö(­YÈ8N.,4$\*¬i\  ÐE9ð÷æ]õËv"î(²HpèìÈ4£¥â	¼çñÑÙ$¡|AÝ-ßòNÎñrdêpüì
+2024-12-15 23:49:59 INFO  SteganographyApp:48 - Starting Steganography Application...
+2024-12-15 23:50:05 WARN  SteganographyApp:130 - Image loading cancelled.
+2024-12-15 23:50:06 ERROR SteganographyApp:155 - Failed to embed text: image or text missing.
+2024-12-15 23:50:12 INFO  SteganographyApp:128 - Image loaded successfully: C:\Users\brend\OneDrive\Изображения\popi.bmp
+2024-12-15 23:50:13 INFO  SteganographyApp:202 - Image saved at C:\Users\brend\IdeaProjects\kursach2\embedded_image.bmp
+2024-12-15 23:50:16 INFO  SteganographyApp:171 - Text extracted successfully: ÐX7YXxül'df
+2024-12-15 23:50:25 INFO  SteganographyApp:128 - Image loaded successfully: C:\Users\brend\IdeaProjects\kursach2\embedded_image.bmp
+2024-12-15 23:50:28 INFO  SteganographyApp:202 - Image saved at C:\Users\brend\IdeaProjects\kursach2\embedded_image.bmp
+2024-12-15 23:50:30 INFO  SteganographyApp:171 - Text extracted successfully: asdasdasdas
+2024-12-15 23:50:33 INFO  SteganographyApp:202 - Image saved at C:\Users\brend\IdeaProjects\kursach2\embedded_image.bmp
+2024-12-15 23:50:35 INFO  SteganographyApp:171 - Text extracted successfully: aszxczxasdzxcz
+2024-12-15 23:50:37 INFO  SteganographyApp:171 - Text extracted successfully: aszxczxasdzxcz
+2024-12-15 23:50:39 INFO  SteganographyApp:171 - Text extracted successfully: aszxczxasdzxcz
+2024-12-15 23:50:45 INFO  SteganographyApp:202 - Image saved at C:\Users\brend\IdeaProjects\kursach2\embedded_image.bmp
+2024-12-15 23:50:47 INFO  SteganographyApp:171 - Text extracted successfully: aaaaaaasssssssaaaaaaaa
